@@ -1,3 +1,4 @@
+import 'package:My_First_Flutter_App/components/nice_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:My_First_Flutter_App/components/my_drawer.dart';
@@ -53,6 +54,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           //textfield for user to type the message
+
           Padding(
             padding: const EdgeInsets.all(25),
             child: Row(
@@ -70,6 +72,9 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
+
+          const NiceText(text: "All Posts", colorName: Colors.lime),
+          const SizedBox(height: 20),
 
           // POSTS LISTING
           StreamBuilder(
