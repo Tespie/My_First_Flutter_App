@@ -9,6 +9,8 @@ class ProfilePage extends StatelessWidget {
 
   // current logged in user
   final User? currentUser = FirebaseAuth.instance.currentUser;
+  //  print('currentUser = ${currentUser}');
+  //19dec23
 
   // future to fetch user details from cloud firestore
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
@@ -50,6 +52,10 @@ class ProfilePage extends StatelessWidget {
 
               // extract data
               Map<String, dynamic>? user = snapshot.data!.data();
+              // final user = snapshot.data!.data();
+              // displayMessageToUser("User = $user", context);
+              // print('USER = ${snapshot.data}');
+              // print('USER = ${user}');
 
               return Center(
                 child: Column(
@@ -83,7 +89,7 @@ class ProfilePage extends StatelessWidget {
 
                     // username
                     Text(
-                      user!['username'],
+                      user?['username'],
                       style: const TextStyle(
                           fontSize: 24, fontWeight: FontWeight.bold),
                     ),
@@ -92,7 +98,7 @@ class ProfilePage extends StatelessWidget {
 
                     // email
                     Text(
-                      user['email'],
+                      user?['email'],
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ],

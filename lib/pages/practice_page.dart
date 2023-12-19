@@ -4,11 +4,16 @@ import 'dart:async';
 import 'dart:ffi';
 import 'dart:math';
 
+import 'package:My_First_Flutter_App/components/my_button.dart';
 import 'package:My_First_Flutter_App/components/my_textfield.dart';
 import 'package:My_First_Flutter_App/helper/helper_functions.dart';
+import 'package:My_First_Flutter_App/pages/first_page.dart';
+import 'package:My_First_Flutter_App/pages/home_page.dart';
+import 'package:My_First_Flutter_App/pages/profile_page.dart';
+import 'package:My_First_Flutter_App/pages/settings_page.dart';
+import 'package:My_First_Flutter_App/pages/tabs/home_tab.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class PracticePage extends StatefulWidget {
   PracticePage({super.key});
@@ -19,6 +24,27 @@ class PracticePage extends StatefulWidget {
 
 class _PracticePageState extends State<PracticePage> {
   List<int> colorShadesList = [50, 100, 200, 300, 400, 600, 700, 800, 900];
+
+  int selectedTabIndex = 0;
+
+  final List _pages = [
+    // home
+    // HomePage(),
+    HomeTab(),
+    //profile
+    ProfilePage(),
+    // settings
+    SettingsPage()
+  ];
+
+  /*
+   * CHANGE THE A 
+   */
+  void changeTab(int currentIndex) {
+    setState(() {
+      selectedTabIndex = currentIndex;
+    });
+  }
 
   String time = "";
 
@@ -115,7 +141,7 @@ class _PracticePageState extends State<PracticePage> {
       /**
        * Scaffold full layer background color 
        */
-      backgroundColor: Colors.black,
+      // backgroundColor: Colors.red,
       // backgroundColor: Colors.green[colorShadesList[bgColor]],
 
       /**
@@ -130,9 +156,86 @@ class _PracticePageState extends State<PracticePage> {
       // body: Test_ListView_With_Builder(tejasNames: tejasNames),
       // body: Test_GridView_With_Builder(),                      // DOC Style Comment tried
       // body: Test_STACK(),
-      body: Test_GestureDetector(),
-
+      // body: Test_GestureDetector(),
+      // body: Test_ButtonWithFirstPageButton(),      // button with first page navigation button click
       // body: ActionChip(label: Text("this is chip >> $time")),
+      // body: FirstPage(),
+      // body: Test_CustomAlertShowBaji(),
+
+      /**
+       * BOTTOM NAVIGATION TAB BAR
+       */
+      // body: _pages[selectedTabIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedTabIndex,
+        // onTap: (currentIndex) => {selectedTabIndex = currentIndex},
+        onTap: changeTab,
+        items: [
+          //home
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home",
+          ),
+
+          // profile
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: "Profile",
+          ),
+
+          // settings
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Settings",
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/*
+ * SHOW DIFFERENT ALERT DIALOG 
+ */
+class Test_CustomAlertShowBaji extends StatelessWidget {
+  const Test_CustomAlertShowBaji({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: NiceTextLabel(text: "Tap me to open Alert"),
+      onTap: () {
+        showCustomDialog(context, "title", "first tap with cancel button",
+            onOkPressed: () {
+          showCustomDialog(context, "OK",
+              "alert dialog without cancel button and \n 🤡 You Can't dismiss me on Outer Touch ⚠️",
+              canDismissed: false);
+        }, showCancel: true);
+      },
+    );
+  }
+}
+
+class Test_ButtonWithFirstPageButton extends StatelessWidget {
+  const Test_ButtonWithFirstPageButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 25),
+        Test_GestureDetector(),
+        SizedBox(height: 25),
+        MyButton(
+            text: "Go to First Page",
+            onTap: () {
+              Navigator.pushNamed(context, 'first_page');
+            }),
+      ],
     );
   }
 }

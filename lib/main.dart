@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:My_First_Flutter_App/pages/first_page.dart';
+import 'package:My_First_Flutter_App/pages/second_page.dart';
+import 'package:My_First_Flutter_App/pages/settings_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:My_First_Flutter_App/auth/auth.dart';
 import 'package:My_First_Flutter_App/auth/login_or_register.dart';
@@ -27,28 +30,37 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: true,
-      home: const AuthPage(), // full and final
+    return SafeArea(
+      child: MaterialApp(
+        /**
+         * HIDE  -- DEBUG -- BANNER FROM TOP RIGHT CORNER
+         */
+        debugShowCheckedModeBanner: false,
+        home: const AuthPage(), // full and final
 
-      // home: PracticePage(),
-      // home: HomePage(),
+        // home: PracticePage(),
+        // home: HomePage(),
 
-      // home: const LoginOrRegister(),
-      // home: ProfilePage(),
-      // home: UsersPage(),
+        // home: const LoginOrRegister(),
+        // home: ProfilePage(),
+        // home: UsersPage(),
+        // home: FirstPage(),
 
-      theme: lightMode,
-      darkTheme: darkMode,
-      title: "Tejas 1st Flutter App",
-      themeMode: ThemeMode.system,
-      routes: {
-        'login_register_page': (context) => const LoginOrRegister(),
-        'home_page': (context) => HomePage(),
-        'profile_page': (context) => ProfilePage(),
-        '/users_page': (context) => const UsersPage(),
-        'practice_page': (context) => PracticePage(),
-      },
+        theme: lightMode,
+        darkTheme: darkMode,
+        title: "Tejas 1st Flutter App",
+        themeMode: ThemeMode.system,
+        routes: {
+          'login_register_page': (context) => const LoginOrRegister(),
+          'home_page': (context) => HomePage(),
+          'profile_page': (context) => ProfilePage(),
+          '/users_page': (context) => const UsersPage(),
+          'practice_page': (context) => PracticePage(),
+          'first_page': (context) => FirstPage(),
+          'second_page': (context) => SecondPage(),
+          'settings_page': (context) => SettingsPage(),
+        },
+      ),
     );
   }
 }

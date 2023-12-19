@@ -43,6 +43,8 @@ class UsersPage extends StatelessWidget {
                 // back button
                 placeBackButton(context),
 
+                const SizedBox(height: 25),
+
                 // list of users
                 Expanded(
                   child: ListView.builder(

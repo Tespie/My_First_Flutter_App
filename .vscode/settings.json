@@ -1,0 +1,5 @@
+{
+    "editor.inlineSuggest.showToolbar": "always",
+    "editor.minimap.showSlider": "always",
+    "editor.inlineSuggest.suppressSuggestions": true
+}

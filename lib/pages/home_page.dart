@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
       //     (value) => {displayMessageToUser("Posted Successfully", context)});
     } else {
       // FlutterError("bhai likh le phele kuch BSDK");
-      showCustomAlert("Warning", "BC lakh to kharo phela");
+      // showCustomAlert("Warning", "BC lakh to kharo phela");
       // showAlert(context, "Warning", "BC lakh to kharo phela");
     }
   }
@@ -80,8 +80,8 @@ class HomePage extends StatelessWidget {
           StreamBuilder(
             stream: database.getPostsStream(),
             builder: (context, snapshot) {
-              // get all posts
-              final posts = snapshot.data!.docs;
+              // // get all posts
+              // final posts = snapshot.data!.docs;
               // loading
               if (snapshot.connectionState == ConnectionState.waiting) {
                 // showLoader(context);
@@ -93,7 +93,15 @@ class HomePage extends StatelessWidget {
                 // any errors
                 return Text("Error : ${snapshot.error}");
                 // return displayMessageToUser(snapshot.error.toString(), context);
-              } else if (snapshot.data == null || posts.isEmpty) {
+                // } else if (snapshot.data == null || posts.isEmpty) {
+                //   // no data
+                //   return const Center(
+                //     child: Padding(
+                //       padding: EdgeInsets.all(25),
+                //       child: Text("No Posts.... Post something!"),
+                //     ),
+                //   );
+              } else if (snapshot.data == null) {
                 // no data
                 return const Center(
                   child: Padding(
@@ -102,6 +110,9 @@ class HomePage extends StatelessWidget {
                   ),
                 );
               } else if (snapshot.hasData) {
+                // get all posts
+                final posts = snapshot.data!.docs;
+
                 // list of posts
                 return Expanded(
                   child: ListView.builder(

@@ -19,6 +19,10 @@ class _LoginPageState extends State<LoginPage> {
 
   final passwordController = TextEditingController();
 
+  void gotoProfile() {
+    Navigator.pushNamed(context, 'profile_page');
+  }
+
   //login method
   void clickLogin() async {
     if (!isValidEmail(emailController.text, isRequired: true) ||
@@ -28,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     // show loader
-    showLoader(context);
+    // showLoader(context);
 
     // try sign in
     try {
@@ -37,9 +41,12 @@ class _LoginPageState extends State<LoginPage> {
 
       // // hide loader
       // if (!context.mounted) return;
-      popContext(context);
+      // popContext(context);
 
       displayMessageToUser("Login Success", context);
+      // showCustomAlertDialog("Success", "Login done successfully",
+      //     onOkPressed: gotoProfile);
+      // showCustomAlert("title", "message");
     } on FirebaseAuthException catch (e) {
       // hide loader
       if (!context.mounted) return;
